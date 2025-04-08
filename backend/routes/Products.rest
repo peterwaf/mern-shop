@@ -1,0 +1,26 @@
+### Add product
+POST http://localhost:5000/api/v1/products/add
+Content-Type: application/json
+
+{"name":"Lorem Ipsumdd","price":400,"description":"Lipsum blabla","category":"Food"}
+
+### Get all products
+
+GET http://localhost:5000/api/v1/products/all
+
+### Load single product details
+
+GET http://localhost:5000/api/v1/products/load/67bb60d7b1b70e42f1ec7e02
+
+### Delete product
+
+DELETE http://localhost:5000/api/v1/products/delete/67bbf7d13f7ed8106b40454d
+
+### patch
+
+PATCH http://localhost:5000/api/v1/products/update/67bb60d7b1b70e42f1ec7e02
+Content-Type: application/json
+
+{"name":"sss","price":100,"description":"Lipsum blabla","category":"Food"}
+
+

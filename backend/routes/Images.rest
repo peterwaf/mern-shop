@@ -1,0 +1,7 @@
+### Get all images
+
+GET http://localhost:5000/api/v1/images/all
+
+### Get a product's images
+
+GET http://localhost:5000/api/v1/images/product/67dcf1e0bfa00b18666e9fc2 

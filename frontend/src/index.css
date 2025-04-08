@@ -1,0 +1,9 @@
+/* .Toastify__progress-bar-theme--colored.Toastify__progress-bar--info,
+.Toastify__progress-bar-theme--colored.Toastify__progress-bar--success,
+.Toastify__progress-bar-theme--colored.Toastify__progress-bar--warning,
+.Toastify__progress-bar-theme--colored.Toastify__progress-bar--error {
+} */
+
+.Toastify__progress-bar-theme--light.Toastify__progress-bar--success {
+  background-color: oklch(0.666 0.179 58.318) !important;
+}

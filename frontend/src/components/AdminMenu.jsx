@@ -38,7 +38,7 @@ function AdminMenu() {
           className="flex items-center gap-3 text-lg font-semibold hover:text-amber-800 transition-all"
           onClick={() => {
             dispatch(toggleUserMenu());
-            navigate("/add-product");
+            navigate("/admin-add-product");
           }}
         >
           <PlusIcon size={20} /> Add New Product
@@ -47,7 +47,7 @@ function AdminMenu() {
           className="flex items-center gap-3 text-lg font-semibold hover:text-amber-800 transition-all"
           onClick={() => {
             dispatch(toggleUserMenu());
-            navigate("/manage-products");
+            navigate("/admin-manage-products");
           }}
         >
           <Package size={20} /> Manage Products

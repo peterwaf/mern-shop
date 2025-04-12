@@ -27,12 +27,7 @@ return (
   <BrowserRouter>
     {/* Hide Navbar on specific pages */}
     {!(
-      windowUrlPath.startsWith("/edit-product/") ||
-      windowUrlPath === "/user-dashboard" ||
-      windowUrlPath === "/admin-dashboard" ||
-      windowUrlPath === "/add-product" ||
-      windowUrlPath === "/manage-products" ||
-      windowUrlPath === "/profile"
+      windowUrlPath.startsWith("/admin-")
     ) && <Navbar />}
     
     <Routes>
@@ -47,10 +42,10 @@ return (
       <Route path="/reset-password-status/:status" element={<ResetPasswordStatus />} />
       <Route path="/user-dashboard" element={<UserDashboard />} />
       <Route path="/admin-dashboard" element={<AdminDashboard />} />
-      <Route path="/add-product" element={<AddProduct />} />
-      <Route path="/manage-products" element={<ManageProducts />} />
+      <Route path="/admin-add-product" element={<AddProduct />} />
+      <Route path="/admin-manage-products" element={<ManageProducts />} />
       <Route path="/profile" element={<Profile />} />
-      <Route path="/edit-product/:id" element={<EditProduct />} />
+      <Route path="/admin-edit-product/:id" element={<EditProduct />} />
     </Routes>
 
     <Footer />

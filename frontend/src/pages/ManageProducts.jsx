@@ -4,18 +4,24 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { fetchProducts } from "../features/productsSlice";
+import { deleteProduct } from "../features/productsSlice";
 import AdminMenu from "../components/AdminMenu";
 import UserNav from "../components/UserNav";
 
 function ManageProducts() {
   const userMenu = useSelector((state) => state.userMenu); // true or false
-  const products = useSelector((state) => state.products?.data?.data || []);
+  const products = useSelector((state) => state.products?.data?.data);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
 
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
+
+
+
+ 
 
   return (
     <div className="h-full w-full flex">
@@ -54,7 +60,7 @@ function ManageProducts() {
                 </tr>
               </thead>
               <tbody>
-                {products.map((product) => (
+                {(products || []).map((product) => (
                   <tr key={product._id} className="border-b">
                     <td className="border px-4 py-2">{product._id}</td>
                     <td className="border px-4 py-2">{product.name}</td>
@@ -63,13 +69,17 @@ function ManageProducts() {
                       <div className="flex flex-wrap justify-center gap-2">
                         <button
                           onClick={() =>
-                            navigate(`/edit-product/${product._id}`)
+                            navigate(`/admin-edit-product/${product._id}`)
                           }
                           className="bg-amber-600 hover:bg-amber-700 text-white font-bold py-2 px-4 rounded"
                         >
                           Edit
                         </button>
-                        <button className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                        <button onClick={() => {
+                          dispatch(deleteProduct(product._id)).then(() => {
+                            dispatch(fetchProducts());
+                          });
+                        }} className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
                           Delete
                         </button>
                       </div>
@@ -78,6 +88,7 @@ function ManageProducts() {
                 ))}
               </tbody>
             </table>
+           
           </div>
         </div>
       </div>

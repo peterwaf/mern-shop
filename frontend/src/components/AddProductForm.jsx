@@ -5,6 +5,7 @@ import { X } from "lucide-react";
 import API from "../API";
 import axios from "axios";
 import LoadImg from "/images/loading.gif";
+import { useNavigate } from "react-router-dom";
 function AddProductForm() {
   const [product, setProduct] = useState({
     name: "",
@@ -16,6 +17,7 @@ function AddProductForm() {
   });
 
   const [uploading, setUploading] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { type, name, value, checked, files } = e.target;
@@ -231,6 +233,12 @@ function AddProductForm() {
           className="bg-amber-600 hover:bg-black text-white font-medium p-4 rounded-md transition-all"
         >
           Add
+        </button>
+
+        <button onClick={(e) =>{
+        e.preventDefault();
+          navigate("/admin-manage-products")}} className="bg-black text-white font-medium p-4 rounded-md transition-all">
+          Go back to Manage Products
         </button>
       </form>
     </>

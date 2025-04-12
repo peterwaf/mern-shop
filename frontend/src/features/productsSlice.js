@@ -11,12 +11,29 @@ export const fetchProducts = createAsyncThunk(
   }
 );
 
+
+export const deleteProduct = createAsyncThunk(
+  "products/deleteProduct",
+  async (productId) => {
+    const consent = confirm("Are you sure you want to delete this product?");
+    if (consent) {
+      const response = await axios.delete(
+        `${API}/api/v1/products/delete/${productId}`
+      );
+      return response.data;
+    }
+    return null; // Explicit return
+  }
+);
+
 const productsSlice = createSlice({
   name: "products",
   initialState: {
     data: [],
     status: "idle",
     error: null,
+    deleteStatus: "idle", // NEW: Tracks delete status
+    deleteError: null, // NEW: Tracks delete errors
   },
   extraReducers: (builder) => {
     builder
@@ -30,7 +47,22 @@ const productsSlice = createSlice({
       .addCase(fetchProducts.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
-      });
+      })
+      .addCase(deleteProduct.pending, (state) => {
+        state.deleteStatus = "loading";
+      })
+      .addCase(deleteProduct.rejected, (state, action) => {
+        state.deleteStatus = "failed";
+        state.deleteError = action.payload?.error || "Something went wrong";
+      })
+      .addCase(deleteProduct.fulfilled, (state, action) => {
+        if (!action.payload) return; // Skip if payload is null (user canceled)
+        state.deleteStatus = "succeeded";
+        const deletedProductId = action.payload.deletedProduct._id;
+        if (Array.isArray(state.data)) {
+          state.data = state.data.filter(product => product._id !== deletedProductId);
+        }
+      })
   },
 });
 

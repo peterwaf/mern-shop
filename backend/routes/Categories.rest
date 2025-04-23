@@ -1,0 +1,24 @@
+### add a category
+POST http://localhost:5000/api/v1/categories/add
+Content-Type: application/json
+
+{"name":"Viatu"}
+
+### get categories
+
+GET  http://localhost:5000/api/v1/categories/all
+
+### update category
+
+PATCH  http://localhost:5000/api/v1/categories/update/6808680c5cfe2f94174a8d92
+Content-Type: application/json
+
+{"name":"Shoes"}
+
+
+### delete category
+
+Delete  http://localhost:5000/api/v1/categories/delete/680867f05cfe2f94174a8d90
+Content-Type: application/json
+
+{"name":"Shoes"}

@@ -16,10 +16,12 @@ const PORT = process.env.PORT || 5000;
 const UsersRoute = require("./routes/Users");
 const ProductsRoute = require("./routes/Products");
 const ImagesRoute = require("./routes/Images");
+const CategoriesRoute = require("./routes/Categories");
 
 app.use("/", UsersRoute);
 app.use("/", ProductsRoute);
 app.use("/", ImagesRoute);
+app.use("/", CategoriesRoute);
 app.get("/", (req, res) => {
   res.send("Hello World!");
 })

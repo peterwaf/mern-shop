@@ -2,7 +2,7 @@
 POST http://localhost:5000/api/v1/categories/add
 Content-Type: application/json
 
-{"name":"Viatu"}
+{"name":"Electronics"}
 
 ### get categories
 

@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from "react";
-import { User, Package, X, PlusIcon } from "lucide-react";
+import { User, Package, X, PlusIcon,FolderKanban } from "lucide-react";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleUserMenu } from "../features/userMenuSlice";
 import { useNavigate } from "react-router-dom";
@@ -51,6 +51,15 @@ function AdminMenu() {
           }}
         >
           <Package size={20} /> Manage Products
+        </button>
+        <button
+          className="flex items-center gap-3 text-lg font-semibold hover:text-amber-800 transition-all"
+          onClick={() => {
+            dispatch(toggleUserMenu());
+            navigate("/admin-manage-categories");
+          }}
+        >
+          <FolderKanban size={20} /> Manage Categories
         </button>
       </nav>
     </div>

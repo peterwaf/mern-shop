@@ -18,6 +18,7 @@ import ManageProducts from "./pages/ManageProducts";
 import Profile from "./pages/Profile";
 import _404_Page from "./pages/_404_Page";
 import EditProduct from "./pages/EditProduct";
+import AdminCategories from "./pages/AdminCategories";
 
 import "./App.css";
 function App() {
@@ -46,6 +47,7 @@ return (
       <Route path="/admin-manage-products" element={<ManageProducts />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/admin-edit-product/:id" element={<EditProduct />} />
+      <Route path="/admin-manage-categories" element={<AdminCategories />} />
     </Routes>
 
     <Footer />

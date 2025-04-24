@@ -4,6 +4,7 @@ import productsReducer from "./productsSlice";
 import productImagesReducer from "./productImagesSlice";
 import imagesMenuReducer from "./imagesMenuSlice";
 import loadProductInfoReducer from "./loadProductInfoSlice";
+import productCategoriesReducer from "./productCategoriesSlice";
 
 export const store = configureStore({
     reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
         productImages: productImagesReducer,
         imagesMenu: imagesMenuReducer,
         loadProductInfo: loadProductInfoReducer,
+        productCategories: productCategoriesReducer
 
     },
 });

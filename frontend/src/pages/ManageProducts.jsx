@@ -44,7 +44,7 @@ function ManageProducts() {
         {/* Dynamic Content Area */}
         <div
           id="contentArea"
-          className="mt-6 w-full p-6 bg-gray-100 border border-gray-300 rounded shadow-md"
+          className="mt-6 w-full h-full p-6 bg-gray-100 border border-gray-300 rounded shadow-md"
         >
           <h2 className="text-center font-bold text-2xl">Manage Products</h2>
 

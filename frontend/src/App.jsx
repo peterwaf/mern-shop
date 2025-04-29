@@ -19,6 +19,7 @@ import Profile from "./pages/Profile";
 import _404_Page from "./pages/_404_Page";
 import EditProduct from "./pages/EditProduct";
 import AdminCategories from "./pages/AdminCategories";
+import EditCategory from "./pages/EditCategory";
 
 import "./App.css";
 function App() {
@@ -48,6 +49,7 @@ return (
       <Route path="/profile" element={<Profile />} />
       <Route path="/admin-edit-product/:id" element={<EditProduct />} />
       <Route path="/admin-manage-categories" element={<AdminCategories />} />
+      <Route path="/admin-edit-category/:id" element={<EditCategory />} />
     </Routes>
 
     <Footer />

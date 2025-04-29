@@ -16,7 +16,7 @@ const deleteCategory = async (req, res) => {
       .json({ status: "success", deletedCategory, message: "Category deleted successfully" });
   } catch (error) {
     console.error("Error while deleting category:", error);
-    res.status(500).json({ status: "error", error: "Internal Server Error" });
+    res.status(500).json({ status: "error", error: "Internal Server Error", message: "Error while deleting category" });
   }
 };
 

@@ -3,11 +3,14 @@ import React from 'react'
 import { useSelector } from "react-redux";
 import AdminMenu from "../components/AdminMenu";
 import UserNav from "../components/UserNav";
-function AdminDashboard() {
+import { useParams } from "react-router-dom";
+import EditCategoryForm from "../components/EditCategoryForm";
+function EditCategory() {
     const userMenu = useSelector((state) => state.userMenu);
-  
+    const { id } = useParams();
+ 
   return (
-    <div className="h-full flex">
+    <div className="h-screen flex">
     {/* Sidebar Menu */}
     <AdminMenu />
 
@@ -26,9 +29,10 @@ function AdminDashboard() {
       {/* Dynamic Content Area */}
       <div
         id="contentArea"
-        className="mt-6 w-full p-6 bg-gray-100 border border-gray-300 rounded shadow-md"
+        className="mt-6 w-full h-screen p-6 bg-gray-100 border border-gray-300 rounded shadow-md"
       >
-        <h2 className="text-center font-bold text-2xl">Admin Dashboard</h2>
+        <h2 className="text-center font-bold text-2xl">Edit Product Category</h2>
+        <EditCategoryForm id={id} />
       </div>
     </div>
   </div>
@@ -36,4 +40,4 @@ function AdminDashboard() {
   )
 }
 
-export default AdminDashboard
+export default EditCategory

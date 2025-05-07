@@ -1,12 +1,16 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { toast } from "react-toastify";
 import { X } from "lucide-react";
 import API from "../API";
 import axios from "axios";
 import LoadImg from "/images/loading.gif";
 import { useNavigate } from "react-router-dom";
+import { useSelector,useDispatch } from "react-redux";
+import { fetchProductCategories } from "../features/productCategoriesSlice";
+
 function AddProductForm() {
+  const dispatch = useDispatch();
   const [product, setProduct] = useState({
     name: "",
     featured: false,
@@ -127,7 +131,12 @@ function AddProductForm() {
       images: prevProduct.images.filter((_, i) => i !== index),
     }));
   };
-  console.log(product);
+
+  const categories = useSelector((state) => state.productCategories.data);
+
+  useEffect(() => {
+    dispatch(fetchProductCategories());
+  }, [dispatch]);
 
   return (
     <>
@@ -172,24 +181,20 @@ function AddProductForm() {
           onChange={handleChange}
         ></textarea>
 
-        <label className="text-gray-700 font-medium">Category</label>
+        <label className="text-gray-700 font-medium">Select Category</label>
         <select
           name="category"
           id="category"
           className="p-2 border rounded-md focus:ring-2 focus:ring-amber-500"
           onChange={handleChange}
         >
-          <option value="">Click to select category</option>
-          <option value="Electronics">Electronics</option>
-          <option value="Furniture">Furniture</option>
-          <option value="Toys">Toys</option>
-          <option value="Health">Health</option>
-          <option value="Beauty">Beauty</option>
-          <option value="Clothing">Clothing</option>
-          <option value="Sports">Sports</option>
-          <option value="Other">Other</option>
-          <option value="Shoes">Shoes</option>
-        </select>
+          {categories.map((category) => (
+            <option key={category._id} value={category.name}>
+              {category.name}
+            </option>
+          ))}
+         </select>
+        
 
         <label htmlFor="images">Select Product Images</label>
         <input

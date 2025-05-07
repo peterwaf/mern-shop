@@ -8,12 +8,15 @@ import { toast } from "react-toastify";
 import { fetchProductImages } from "../features/productImagesSlice";
 import { deleteProductImage } from "../features/productImagesSlice";
 import { addProductImage } from "../features/productImagesSlice";
+import { fetchProductCategories } from "../features/productCategoriesSlice";
 import axios from "axios";
 import API from "../API";
 import LoadImg from "/images/loading.gif";
 import EditImgModal from "./EditImgModal";
 // eslint-disable-next-line react/prop-types
 function EditProductForm({ id }) {
+  //categories
+  const categories = useSelector((state) => state.productCategories.data);
   // track uploading statuses
   const [isUploadingProdImages, setIsUploadingProdImages] = useState(false);
   const [imgUploadStatusMsg, setImgUploadStatusMsg] = useState("");
@@ -166,6 +169,11 @@ function EditProductForm({ id }) {
     }
   }, [addImgError, addImgStatus]);
 
+   useEffect(() => {
+      dispatch(fetchProductCategories());
+    }, [dispatch]);
+    
+
   return (
     <form
       onSubmit={handleSubmit}
@@ -188,6 +196,7 @@ function EditProductForm({ id }) {
         className="p-2 size-4 border rounded-md focus:ring-2 focus:ring-amber-500"
         type="checkbox"
         name="featured"
+        checked={productInfoData.featured}
         id="featured"
         onChange={handleChange}
       />
@@ -221,15 +230,11 @@ function EditProductForm({ id }) {
         <option value={productInfoData.category}>
           {productInfoData.category}
         </option>
-        <option value="Electronics">Electronics</option>
-        <option value="Furniture">Furniture</option>
-        <option value="Toys">Toys</option>
-        <option value="Health">Health</option>
-        <option value="Beauty">Beauty</option>
-        <option value="Clothing">Clothing</option>
-        <option value="Sports">Sports</option>
-        <option value="Other">Other</option>
-        <option value="Shoes">Shoes</option>
+        {categories.map((category) => (
+          <option key={category._id} value={category.name}>
+            {category.name}
+          </option>
+        ))}
       </select>
 
       <label className="text-gray-700 font-medium">
@@ -268,7 +273,12 @@ function EditProductForm({ id }) {
         )}
         <br />
       </div>
-      {showEditModalImg && <EditImgModal imgToEdit = {imgToEdit} canceEditImgModal = {() => setShowEditModalImg(false)} />}
+      {showEditModalImg && (
+        <EditImgModal
+          imgToEdit={imgToEdit}
+          canceEditImgModal={() => setShowEditModalImg(false)}
+        />
+      )}
 
       <label className="text-gray-700 font-medium">
         Would you like to add new images?

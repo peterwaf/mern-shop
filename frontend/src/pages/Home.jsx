@@ -1,47 +1,49 @@
 // eslint-disable-next-line no-unused-vars
 import React from "react";
 import HomeSlider from "../components/HomeSlider";
+import SideBar from "../components/SideBar";
+import { useEffect } from "react";
+import { useSelector,useDispatch } from "react-redux";
+import { fetchProducts } from "../features/productsSlice";
 
 function Home() {
+  const products = useSelector((state) => state.products.data.data);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, [dispatch]);
+  
+  console.log(products);
+  
   return (
     <>
     <HomeSlider />
       <div className="h-full px-8 grid md:grid-cols-12 gap-6 py-8">
         {/* Categories Section */}
-        <div
-          id="categories"
-          className="md:col-span-3 background-white rounded-md shadow-md p-4 border-amber-600 border-1"
-        >
-          <ul className="space-y-2">
-            <li className="bg-white rounded-md shadow-md p-4 font-bold">
-              <a className="hover:text-amber-600" href="#">
-                Category 1
-              </a>
-            </li>
-          </ul>
-        </div>
+        <SideBar />
 
         {/* Products Section */}
         <div id="products" className="md:col-span-9 w-full">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* Sample Product Card */}
-            {Array.from({ length: 4 }).map((_, index) => (
+            {(products).map((product) => (
               <div
-                key={index}
+                key={product._id}
                 className="max-w-md mx-auto rounded-md overflow-hidden shadow-md hover:shadow-lg"
               >
                 <div className="relative">
                   <img
                     className="w-full"
-                    src="https://images.unsplash.com/photo-1523275335684-37898b6baf30"
+                    src={product.image}
                     alt="Product Image"
                   />
                 </div>
                 <div className="p-4">
-                  <h3 className="text-lg font-medium mb-2">Product Title</h3>
+                  <h3 className="text-lg font-medium mb-2">{product.name}</h3>
 
                   <div className="flex items-center justify-between">
-                    <span className="font-bold text-lg">$19.99</span>
+                    <span className="font-bold text-lg">KES: {product.price}</span>
                     <button className="bg-amber-600 hover:bg-black text-white font-bold py-2 px-4 rounded">
                       Add to Cart
                     </button>

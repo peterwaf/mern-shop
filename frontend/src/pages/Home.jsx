@@ -11,8 +11,8 @@ import API from "../API";
 function Home() {
   const products = useSelector((state) => state.products.data);
   const [productsImages, setProductsImages] = useState([]);
+  const homePageProducts = products.filter((product) => product.featured);
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
@@ -66,7 +66,7 @@ function Home() {
           >
             {/* Sample Product Card */}
             {products ? (
-              products.map((product) => (
+              homePageProducts.map((product) => (
                 <div
                   key={product._id}
                   className="max-w-[320px] h-[420px] mx-auto rounded-md overflow-hidden shadow-md hover:shadow-lg"

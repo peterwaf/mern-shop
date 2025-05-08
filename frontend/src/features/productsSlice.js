@@ -7,7 +7,7 @@ export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
   async () => {
     const response = await axios.get(`${API}/api/v1/products/all`);
-    return response.data;
+    return response.data.data;
   }
 );
 

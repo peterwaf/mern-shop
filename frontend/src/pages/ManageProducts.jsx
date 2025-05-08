@@ -10,7 +10,7 @@ import UserNav from "../components/UserNav";
 
 function ManageProducts() {
   const userMenu = useSelector((state) => state.userMenu); // true or false
-  const products = useSelector((state) => state.products?.data?.data);
+  const products = useSelector((state) => state.products?.data);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -18,10 +18,6 @@ function ManageProducts() {
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
-
-
-
- 
 
   return (
     <div className="h-full w-full flex">

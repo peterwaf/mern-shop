@@ -44,7 +44,7 @@ function Home() {
 
   return (
     <>
-      <HomeSlider />
+      <HomeSlider homePageProducts={homePageProducts} productsImages={productsImages} />
       <div className="h-full px-8 grid md:grid-cols-12 gap-6 py-8">
         {/* Categories Section */}
         <SideBar />

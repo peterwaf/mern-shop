@@ -1,60 +1,25 @@
+/* eslint-disable react/prop-types */
 // eslint-disable-next-line no-unused-vars
 import React from "react";
 import { MoveLeft, MoveRight } from "lucide-react";
 import { useState, useEffect, useCallback } from "react";
 
-function HomeSlider() {
+function HomeSlider({homePageProducts,productsImages}) {
   const [count, setCount] = useState(0);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const increment = useCallback(() => {
     setCount(count + 1);
-    if (count >= productsData.length - 1) {
+    if (count >= homePageProducts.length - 1) {
       setCount(0);
     }
   });
   const decrement = () => {
     setCount(count - 1);
     if (count <= 0) {
-      setCount(productsData.length - 1);
+      setCount(homePageProducts.length - 1);
     }
   };
-  const productsData = [
-    {
-      _id: "asdwdedwe",
-      name: "Lorem Ipsum 1",
-      image: "https://picsum.photos/200?random=1",
-      price: 200,
-      description: "Lipsum Blablabla bala",
-    },
-    {
-      _id: "qwerty123",
-      name: "Lorem Ipsum 2",
-      image: "https://picsum.photos/200?random=2",
-      price: 150,
-      description: "Another dummy description",
-    },
-    {
-      _id: "zxcvb456",
-      name: "Lorem Ipsum 3",
-      image: "https://picsum.photos/200?random=3",
-      price: 300,
-      description: "This is a third product description",
-    },
-    {
-      _id: "lkjhgf789",
-      name: "Lorem Ipsum 4",
-      image: "https://picsum.photos/200?random=4",
-      price: 250,
-      description: "Yet another dummy product description",
-    },
-    {
-      _id: "mnbvcx987",
-      name: "Lorem Ipsum 5",
-      image: "https://picsum.photos/200?random=5",
-      price: 180,
-      description: "A different product with a unique description",
-    },
-  ];
+  
   useEffect(() => {
     const interval = setInterval(() => {
       increment();
@@ -63,6 +28,8 @@ function HomeSlider() {
     // Cleanup function to clear the interval when the component unmounts
     return () => clearInterval(interval);
   }, [increment]); // Add `increment` as a dependency
+
+  
   return (
     <div
       id="homeSlider"
@@ -73,19 +40,29 @@ function HomeSlider() {
           <MoveLeft onClick={decrement} />
         </div>
         <div className="w-1/2 flex items-center justify-center">
-          <img
-            className="w-full h-full object-cover"
-            src={productsData[count].image}
-            alt=""
-          />
+          {homePageProducts.map((product, index) => (
+            <img
+              key={index}
+              className={`w-full h-[400px] object-cover ${count === index ? "block" : "hidden"}`}
+              src={
+                productsImages[homePageProducts.indexOf(product)]?.find(img => img.isFeatured)?.image
+                || "https://picsum.photos/200?random=1"
+              }
+              alt={product.name}
+            />
+          ))}
         </div>
         <div className="w-1/2 flex flex-col justify-center p-4">
-          <h1 className="font-bold text-2xl mb-4">{productsData[count].name}</h1>
-          <p className="mb-4">{productsData[count].description}</p>
-          <p className="font-bold text-xl mb-4">KES {productsData[count].price}</p>
-          <button className="bg-amber-600 hover:bg-amber-700 text-white font-bold py-2 px-4 rounded w-fit">
-            Add to Cart
-          </button>
+          {homePageProducts.map((product, index) => (
+            <div key={index} className={`${count === index ? "block" : "hidden"}`}>
+              <h1 className="font-bold text-2xl mb-4">{product.name}</h1>
+              <p className="mb-4">{product.description}</p>
+              <p className="font-bold text-xl mb-4">KSh {product.price}</p>
+              <button className="bg-amber-600 hover:bg-amber-700 text-white font-bold py-2 px-4 rounded w-fit">
+                Add to Cart
+              </button>
+            </div>
+          ))}
         </div>
         <div className="icon absolute top-[40%] right-10 bg-amber-600 text-white rounded-2xl p-1 z-8">
           <MoveRight onClick={increment} />

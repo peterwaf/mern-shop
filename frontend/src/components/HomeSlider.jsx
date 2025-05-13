@@ -4,6 +4,7 @@ import React from "react";
 import { MoveLeft, MoveRight } from "lucide-react";
 import { useState, useEffect, useCallback } from "react";
 
+
 function HomeSlider({homePageProducts,productsImages}) {
   const [count, setCount] = useState(0);
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -33,7 +34,7 @@ function HomeSlider({homePageProducts,productsImages}) {
   return (
     <div
       id="homeSlider"
-      className="px-8 w-screen md:w-full md:mt-38 min-h-[300px] relative overflow-hidden"
+      className="px-8 w-screen mt-40 md:w-full min-h-[300px] relative overflow-hidden"
     >
       <div id="sliderHolder" className="md:flex h-full">
         <div className="icon absolute top-[40%] left-10 bg-amber-600 text-white rounded-2xl p-1 z-8">

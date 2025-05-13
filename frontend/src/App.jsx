@@ -51,7 +51,7 @@ return (
       <Route path="/admin-edit-product/:id" element={<EditProduct />} />
       <Route path="/admin-manage-categories" element={<AdminCategories />} />
       <Route path="/admin-edit-category/:id" element={<EditCategory />} />
-      <Route path="/products" element={<Products />} />
+      <Route path="/products/category/:category" element={<Products />} />
     </Routes>
 
     <Footer />

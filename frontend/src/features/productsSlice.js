@@ -11,7 +11,6 @@ export const fetchProducts = createAsyncThunk(
   }
 );
 
-
 export const deleteProduct = createAsyncThunk(
   "products/deleteProduct",
   async (productId) => {
@@ -34,6 +33,12 @@ const productsSlice = createSlice({
     error: null,
     deleteStatus: "idle", // NEW: Tracks delete status
     deleteError: null, // NEW: Tracks delete errors
+    categoryFilter: "all", // Add filter field
+  },
+  reducers: {
+    setCategoryFilter(state, action) {
+      state.categoryFilter = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -60,10 +65,14 @@ const productsSlice = createSlice({
         state.deleteStatus = "succeeded";
         const deletedProductId = action.payload.deletedProduct._id;
         if (Array.isArray(state.data)) {
-          state.data = state.data.filter(product => product._id !== deletedProductId);
+          state.data = state.data.filter(
+            (product) => product._id !== deletedProductId
+          );
         }
-      })
+      });
   },
 });
 
 export default productsSlice.reducer;
+
+export const { setCategoryFilter } = productsSlice.actions;

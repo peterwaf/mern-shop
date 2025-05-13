@@ -21,7 +21,7 @@ const Navbar = () => {
           <div className="hidden md:flex space-x-6">
             <NavLink to="/" icon={<Home size={20} />} label="Home" />
             <NavLink to="/about" icon={<Info size={20} />} label="About" />
-            <NavLink to="/products" icon={<ShoppingBag size={20} />} label="Products" />
+            <NavLink to="/products/category/all" icon={<ShoppingBag size={20} />} label="Products" />
             <NavLink to="/contact" icon={<Mail size={20} />} label="Contact Us" />
           </div>
 
@@ -39,7 +39,7 @@ const Navbar = () => {
         <div className="md:hidden bg-white border-t shadow-sm">
           <NavLink to="/" icon={<Home size={20} />} label="Home" onClick={() => setIsOpen(false)} />
           <NavLink to="/about" icon={<Info size={20} />} label="About" onClick={() => setIsOpen(false)} />
-          <NavLink to="/products" icon={<ShoppingBag size={20} />} label="Products" onClick={() => setIsOpen(false)} />
+          <NavLink to="/products/category/all" icon={<ShoppingBag size={20} />} label="Products" onClick={() => setIsOpen(false)} />
           <NavLink to="/contact" icon={<Mail size={20} />} label="Contact Us" onClick={() => setIsOpen(false)} />
         </div>
       )}

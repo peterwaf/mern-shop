@@ -1,6 +1,5 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from "react";
-import HomeSlider from "../components/HomeSlider";
 import SideBar from "../components/SideBar";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -8,10 +7,9 @@ import { fetchProducts } from "../features/productsSlice";
 import axios from "axios";
 import API from "../API";
 
-function Home() {
+function Products() {
   const products = useSelector((state) => state.products.data);
   const [productsImages, setProductsImages] = useState([]);
-  const homePageProducts = products.filter((product) => product.featured);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchProducts());
@@ -44,8 +42,8 @@ function Home() {
 
   return (
     <>
-      <HomeSlider homePageProducts={homePageProducts} productsImages={productsImages} />
-      <div className="h-full px-8 grid md:grid-cols-12 gap-6 py-8">
+    {/* slider was here */}
+      <div className="h-full px-8 mt-30 grid md:grid-cols-12 gap-6 py-8">
         {/* Categories Section */}
         <SideBar />
         {/* Products Section */}
@@ -66,7 +64,7 @@ function Home() {
           >
             {/* Sample Product Card */}
             {products ? (
-              homePageProducts.map((product) => (
+              products.map((product) => (
                 <div
                   key={product._id}
                   className="max-w-[320px] h-[420px] mx-auto rounded-md overflow-hidden shadow-md hover:shadow-lg"
@@ -110,4 +108,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Products;

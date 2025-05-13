@@ -16,7 +16,7 @@ function SideBar() {
   return (
     <div
           id="categories"
-          className="md:col-span-3 background-white rounded-md shadow-md p-4 border-amber-600 border-1"
+          className="md:col-span-3 mt-10 md:mt-0 background-white rounded-md shadow-md p-4 border-amber-600 border-1"
         >
           <ul className="space-y-2">
             {categories.map((category) => (

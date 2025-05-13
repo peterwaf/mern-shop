@@ -33,26 +33,26 @@ function HomeSlider({homePageProducts,productsImages}) {
   return (
     <div
       id="homeSlider"
-      className="px-8 w-full mt-40 md:mt-32 min-h-[300px] relative overflow-hidden"
+      className="px-8 w-screen md:w-full md:mt-38 min-h-[300px] relative overflow-hidden"
     >
-      <div id="sliderHolder" className="flex h-full">
+      <div id="sliderHolder" className="md:flex h-full">
         <div className="icon absolute top-[40%] left-10 bg-amber-600 text-white rounded-2xl p-1 z-8">
           <MoveLeft onClick={decrement} />
         </div>
-        <div className="w-1/2 flex items-center justify-center">
+        <div className="w-full sm:w-full md:w-1/2 flex items-center justify-center">
           {homePageProducts.map((product, index) => (
             <img
-              key={index}
+              key={product._id}
               className={`w-full h-[400px] object-cover ${count === index ? "block" : "hidden"}`}
               src={
-                productsImages[homePageProducts.indexOf(product)]?.find(img => img.isFeatured)?.image
+                productsImages[homePageProducts.indexOf(product)]?.find(img => img.isFeatured && img.productId === product._id)?.image
                 || "https://picsum.photos/200?random=1"
               }
               alt={product.name}
             />
           ))}
         </div>
-        <div className="w-1/2 flex flex-col justify-center p-4">
+        <div className="w-full sm:w-full md:w-1/2 flex flex-col justify-center p-4">
           {homePageProducts.map((product, index) => (
             <div key={index} className={`${count === index ? "block" : "hidden"}`}>
               <h1 className="font-bold text-2xl mb-4">{product.name}</h1>

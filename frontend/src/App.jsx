@@ -20,6 +20,7 @@ import _404_Page from "./pages/_404_Page";
 import EditProduct from "./pages/EditProduct";
 import AdminCategories from "./pages/AdminCategories";
 import EditCategory from "./pages/EditCategory";
+import Products from "./pages/Products";
 
 import "./App.css";
 function App() {
@@ -50,6 +51,7 @@ return (
       <Route path="/admin-edit-product/:id" element={<EditProduct />} />
       <Route path="/admin-manage-categories" element={<AdminCategories />} />
       <Route path="/admin-edit-category/:id" element={<EditCategory />} />
+      <Route path="/products" element={<Products />} />
     </Routes>
 
     <Footer />

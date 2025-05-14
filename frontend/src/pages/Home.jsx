@@ -18,33 +18,36 @@ function Home() {
   }, [dispatch]);
 
   //fetch images of each product's images and then concatenate them into
-  //a single array
+  // an object
   useEffect(() => {
     const fetchProductImages = async () => {
       try {
+        const imagesByProduct = {};
         await Promise.all(
           products.map(async (product) => {
             const response = await axios.get(
               `${API}/api/v1/images/product/${product._id}`
             );
-            const singleProductImages = response.data.productImages;
-            setProductsImages((prevProductImages) => [
-              ...prevProductImages,
-              singleProductImages,
-            ]);
+            imagesByProduct[product._id] = response.data.productImages || [];
           })
         );
+        setProductsImages(imagesByProduct);
       } catch (error) {
         console.error("Error fetching product images:", error);
       }
     };
 
-    fetchProductImages();
+    if (products.length) {
+      fetchProductImages();
+    }
   }, [products]);
 
   return (
     <>
-      <HomeSlider homePageProducts={homePageProducts} productsImages={productsImages} />
+      <HomeSlider
+        homePageProducts={homePageProducts}
+        productsImages={productsImages}
+      />
       <div className="h-full px-8 grid md:grid-cols-12 gap-6 py-8">
         {/* Categories Section */}
         <SideBar />
@@ -75,10 +78,12 @@ function Home() {
                     <img
                       className="w-[320px] h-50 object-cover"
                       src={
-                        productsImages[products.indexOf(product)]?.find(img => img.isFeatured && img.productId === product._id)?.image
-                        || "https://picsum.photos/200?random=1"
+                        productsImages[product._id]?.find(
+                          (img) =>
+                            img.isFeatured && img.productId === product._id
+                        )?.image || "https://picsum.photos/200?random=1"
                       }
-                      alt="Product Image"
+                      alt={product.name}
                     />
                   </div>
                   <div className="p-4">
@@ -88,7 +93,7 @@ function Home() {
                       <span className="font-bold text-lg">
                         KSh {product.price}
                       </span>
-                      
+
                       <button className="bg-amber-600 hover:bg-black text-white font-bold py-2 px-4 rounded">
                         Add to Cart
                       </button>

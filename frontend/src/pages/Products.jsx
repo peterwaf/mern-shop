@@ -22,29 +22,31 @@ function Products() {
   }, [dispatch]);
 
   //fetch images of each product's images and then concatenate them into
-  //a single array
+  // an object
   useEffect(() => {
     const fetchProductImages = async () => {
       try {
+        const imagesByProduct = {};
         await Promise.all(
           products.map(async (product) => {
             const response = await axios.get(
               `${API}/api/v1/images/product/${product._id}`
             );
-            const singleProductImages = response.data.productImages;
-            setProductsImages((prevProductImages) => [
-              ...prevProductImages,
-              singleProductImages,
-            ]);
+            imagesByProduct[product._id] = response.data.productImages || [];
           })
         );
+        setProductsImages(imagesByProduct);
       } catch (error) {
         console.error("Error fetching product images:", error);
       }
     };
 
-    fetchProductImages();
+    if (products.length) {
+      fetchProductImages();
+    }
   }, [products]);
+
+  console.log(productsImages);
 
   return (
     <>
@@ -79,7 +81,7 @@ function Products() {
                     <img
                       className="w-[320px] h-50 object-cover"
                       src={
-                        productsImages[products.indexOf(product)]?.find(
+                        productsImages[product._id]?.find(
                           (img) =>
                             img.isFeatured && img.productId === product._id
                         )?.image || "https://picsum.photos/200?random=1"

@@ -3,8 +3,12 @@
 import React from "react";
 import { MoveLeft, MoveRight } from "lucide-react";
 import { useState, useEffect, useCallback } from "react";
+import {useSelector,useDispatch} from "react-redux";
+import { addToCart, removefromCart, updateCartItem } from "../features/cartItemsSlice";
 
 function HomeSlider({ homePageProducts, productsImages }) {
+  const cartItems = useSelector((state) => state.cartItems.data);
+  const dispatch = useDispatch();
   const [count, setCount] = useState(0);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const increment = useCallback(() => {
@@ -28,6 +32,8 @@ function HomeSlider({ homePageProducts, productsImages }) {
     // Cleanup function to clear the interval when the component unmounts
     return () => clearInterval(interval);
   }, [increment]); // Add `increment` as a dependency
+
+console.log(cartItems);
 
   return (
     <div
@@ -63,7 +69,7 @@ function HomeSlider({ homePageProducts, productsImages }) {
               <h1 className="font-bold text-2xl mb-4">{product.name}</h1>
               <p className="mb-4">{product.description}</p>
               <p className="font-bold text-xl mb-4">KSh {product.price}</p>
-              <button className="bg-amber-600 hover:bg-amber-700 text-white font-bold py-2 px-4 rounded w-fit">
+              <button onClick={() => dispatch(addToCart(product))} className="bg-amber-600 hover:bg-amber-700 text-white font-bold py-2 px-4 rounded w-fit">
                 Add to Cart
               </button>
             </div>

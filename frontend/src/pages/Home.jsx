@@ -7,11 +7,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts } from "../features/productsSlice";
 import axios from "axios";
 import API from "../API";
+import { addToCart} from "../features/cartItemsSlice";
 
 function Home() {
   const products = useSelector((state) => state.products.data);
   const [productsImages, setProductsImages] = useState([]);
   const homePageProducts = products.filter((product) => product.featured);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchProducts());
@@ -94,7 +96,7 @@ function Home() {
                         KSh {product.price}
                       </span>
 
-                      <button className="bg-amber-600 hover:bg-black text-white font-bold py-2 px-4 rounded">
+                      <button onClick={() => dispatch(addToCart(product))} className="bg-amber-600 hover:bg-black text-white font-bold py-2 px-4 rounded">
                         Add to Cart
                       </button>
                     </div>

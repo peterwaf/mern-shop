@@ -4,7 +4,7 @@ import React from "react";
 import { MoveLeft, MoveRight } from "lucide-react";
 import { useState, useEffect, useCallback } from "react";
 import {useSelector,useDispatch} from "react-redux";
-import { addToCart, removefromCart, updateCartItem } from "../features/cartItemsSlice";
+import { addToCart } from "../features/cartItemsSlice";
 
 function HomeSlider({ homePageProducts, productsImages }) {
   const cartItems = useSelector((state) => state.cartItems.data);

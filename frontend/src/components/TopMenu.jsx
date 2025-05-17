@@ -2,8 +2,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ShoppingCart } from "lucide-react";
+import {useSelector} from "react-redux";
 
 function TopMenu() {
+  const cartItemsQty = useSelector((state) => state.cartItems.cartItemsQty);
+
   return (
     <div className="flex flex-col md:flex-row justify-between items-center mt-4 px-8">
       
@@ -33,7 +36,7 @@ function TopMenu() {
           My Cart 
           <span className="flex items-center p-1">
             <ShoppingCart size={20} /> 
-            <sup className="ml-1 text-xs">0</sup>
+            <sup className="ml-1 text-xs">{cartItemsQty}</sup>
           </span>
         </Link>
       </div>

@@ -106,7 +106,7 @@ function Products() {
             ) : (
               <div className="flex items-center justify-center h-full">
                 <p className="text-2xl my-auto">
-                  No products found, please check back later
+                  No products found
                 </p>
               </div>
             )}

@@ -21,6 +21,7 @@ import EditProduct from "./pages/EditProduct";
 import AdminCategories from "./pages/AdminCategories";
 import EditCategory from "./pages/EditCategory";
 import Products from "./pages/Products";
+import Cart from "./pages/Cart";
 
 import "./App.css";
 function App() {
@@ -52,6 +53,7 @@ return (
       <Route path="/admin-manage-categories" element={<AdminCategories />} />
       <Route path="/admin-edit-category/:id" element={<EditCategory />} />
       <Route path="/products/category/:category" element={<Products />} />
+      <Route path="/cart" element={<Cart />} />
     </Routes>
 
     <Footer />

@@ -63,11 +63,19 @@ const cartItemsSlice = createSlice({
       state.cartItemsQty = cartItemsQty;
       state.cartItemsTotal = cartItemsTotal;
     },
+    increaseCartItemQty: (state, action) => {
+      const item = state.data.find((item) => item._id === action.payload);
+      item.quantity += 1;
+      localStorage.setItem("cartItems", JSON.stringify(state.data));
 
-    updateCartItem: (state, action) => {
-      state.data = state.data.map((item) =>
-        item._id === action.payload._id ? action.payload : item
-      );
+      const { cartItemsQty, cartItemsTotal } = calculateTotals(state.data);
+      state.cartItemsQty = cartItemsQty;
+      state.cartItemsTotal = cartItemsTotal;
+    },
+    decreaseCartItemQty: (state, action) => {
+      const item = state.data.find((item) => item._id === action.payload);
+      if (item.quantity === 1) return;
+      item.quantity -= 1;
       localStorage.setItem("cartItems", JSON.stringify(state.data));
 
       const { cartItemsQty, cartItemsTotal } = calculateTotals(state.data);
@@ -75,21 +83,9 @@ const cartItemsSlice = createSlice({
       state.cartItemsTotal = cartItemsTotal;
     },
 
-    updateCartItemsQty: (state, action) => {
-      state.data = state.data.map((item) =>
-        item._id === action.payload._id
-          ? { ...item, quantity: action.payload.quantity }
-          : item
-      );
-      localStorage.setItem("cartItems", JSON.stringify(state.data));
-
-      const { cartItemsQty, cartItemsTotal } = calculateTotals(state.data);
-      state.cartItemsQty = cartItemsQty;
-      state.cartItemsTotal = cartItemsTotal;
-    },
   },
 });
 
 export default cartItemsSlice.reducer;
-export const { addToCart, removefromCart, updateCartItem, updateCartItemsQty } =
+export const { addToCart, removefromCart,decreaseCartItemQty,increaseCartItemQty } =
   cartItemsSlice.actions;

@@ -4,19 +4,34 @@ import { useEffect } from "react";
 import axios from "axios";
 import API from "../API";
 import { useSelector, useDispatch } from "react-redux";
+import {useNavigate} from "react-router-dom";
+import { toast } from "react-toastify";
 import {
-  addToCart,
   removefromCart,
   decreaseCartItemQty,
   increaseCartItemQty
 } from "../features/cartItemsSlice";
+
 
 function Cart() {
   const [productsImages, setProductsImages] = useState([]);
   const cartItems = useSelector((state) => state.cartItems.data);
   const cartItemsTotal = useSelector((state) => state.cartItems.cartItemsTotal);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
+
+
+
+  const checkIsLoggedIn = () => {
+    const token = localStorage.getItem("token");
+   if(!token){
+    //redirect to login page
+    navigate("/login");
+   }
+
+    
+  }
   useEffect(() => {
     const fetchProductImages = async () => {
       try {
@@ -114,14 +129,23 @@ function Cart() {
                 </div>
               ))}
             </div>
+
           )}
+          <div className="flex items-center justify-center mt-4">
+            <p className="text-lg font-bold italic text-amber-600">Dear customer, If you are not logged in upon checkout, you will be redirected to login/signup page first.</p>
+
+          </div>
           <div className="flex items-center justify-end mt-4">
             <p className="text-lg font-bold mr-4">
               Total: KSh {cartItemsTotal}
             </p>
             <button
               onClick={() => {
-                // checkout logic
+                if(cartItems.length === 0){
+                  toast.error("Your Cart is empty");
+                  return;
+                }
+                checkIsLoggedIn();
               }}
               className="bg-amber-500 text-black font-bold px-4 py-2 rounded"
             >

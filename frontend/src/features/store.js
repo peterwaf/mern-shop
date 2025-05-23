@@ -6,6 +6,7 @@ import imagesMenuReducer from "./imagesMenuSlice";
 import loadProductInfoReducer from "./loadProductInfoSlice";
 import productCategoriesReducer from "./productCategoriesSlice";
 import cartItemsReducer from "./cartItemsSlice";
+import userLoggedInReducer from "./isUserLoggedInSlice";
 
 export const store = configureStore({
     reducer: {
@@ -15,7 +16,8 @@ export const store = configureStore({
         imagesMenu: imagesMenuReducer,
         loadProductInfo: loadProductInfoReducer,
         productCategories: productCategoriesReducer,
-        cartItems: cartItemsReducer
+        cartItems: cartItemsReducer,
+        isUserLoggedIn : userLoggedInReducer
 
     },
 });

@@ -4,16 +4,21 @@ import { Menu} from "lucide-react";
 import UserMenu from "../components/UserMenu";
 import { useSelector,useDispatch } from "react-redux";
 import { toggleUserMenu } from "../features/userMenuSlice";
+import {updateLoggedInStatus} from "../features/isUserLoggedInSlice";
+import { useEffect } from "react";
 
 function UserDashboard() {
   const userMenu = useSelector((state) => state.userMenu);
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(updateLoggedInStatus());
+  }, [dispatch]);
 
   // Function to handle menu clicks and update content
  
   return (
-    <div className="h-screen flex">
+    <div className="mt-40 md:mt-32 px-8 py-8 h-auto">
       {/* Sidebar Menu */}
       <UserMenu />
 

@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from "react";
-import {ShoppingCart, User, Package, MapPin, X } from "lucide-react";
+import {User, Package, MapPin, X } from "lucide-react";
 import { useSelector, useDispatch } from "react-redux";
 import {toggleUserMenu} from "../features/userMenuSlice";
 
@@ -35,11 +35,6 @@ const dispatch = useDispatch();
             className="flex items-center gap-3 text-lg font-semibold hover:text-amber-800 transition-all"
           >
             <Package size={20} /> My Orders
-          </button>
-          <button
-            className="flex items-center gap-3 text-lg font-semibold hover:text-amber-800 transition-all"
-          >
-            <ShoppingCart size={20} /> Cart Items
           </button>
           <button
             className="flex items-center gap-3 text-lg font-semibold hover:text-amber-800 transition-all"

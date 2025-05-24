@@ -5,7 +5,8 @@ import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
+import { updateLoggedInStatus } from "../features/isUserLoggedInSlice";
 function SignInForm() {
   const [formData, setFormData] = useState({
     email: "",
@@ -13,6 +14,7 @@ function SignInForm() {
   });
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,7 +34,15 @@ function SignInForm() {
         toast.success(response.data.message);
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("firstName", response.data.firstName);
-        navigate("/user-dashboard");
+        //check if cart items exists in localstorage and redirect to cart if it does
+        if (localStorage.getItem("cartItems")) {
+          setTimeout(() => {
+            dispatch(updateLoggedInStatus());
+          }, 0);
+          navigate("/cart");
+        } else {
+          navigate("/user-dashboard");
+        }
       }
     } catch (error) {
       toast.error(error.response.data.error);

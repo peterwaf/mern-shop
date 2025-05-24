@@ -6,6 +6,7 @@ import API from "../API";
 import { useSelector, useDispatch } from "react-redux";
 import {useNavigate} from "react-router-dom";
 import { toast } from "react-toastify";
+import { updateLoggedInStatus } from "../features/isUserLoggedInSlice";
 import {
   removefromCart,
   decreaseCartItemQty,
@@ -14,6 +15,9 @@ import {
 
 
 function Cart() {
+  const isUserLoggedIn = useSelector(
+    (state) => state.isUserLoggedIn
+  )
   const [productsImages, setProductsImages] = useState([]);
   const cartItems = useSelector((state) => state.cartItems.data);
   const cartItemsTotal = useSelector((state) => state.cartItems.cartItemsTotal);
@@ -24,13 +28,21 @@ function Cart() {
 
 
   const checkIsLoggedIn = () => {
-    const token = localStorage.getItem("token");
-   if(!token){
-    //redirect to login page
-    navigate("/login");
-   }
+   setTimeout(() => {
+     dispatch(updateLoggedInStatus());
+   }, 0);
+   if(!isUserLoggedIn) return navigate("/login");
+   processPayment();
+  }
 
-    
+  const processPayment = async () => {
+    //process payment
+    try {
+      //redirect to payment page
+      navigate("/payment");
+    } catch (error) {
+      console.log(error);
+    }
   }
   useEffect(() => {
     const fetchProductImages = async () => {
@@ -58,7 +70,7 @@ function Cart() {
   return (
     <>
       {/* slider was here */}
-      <div className="px-8 mt-30 grid md:grid-cols-12 gap-6 py-8 h-auto">
+      <div className={`px-8 mt-30 grid md:grid-cols-12 gap-6 py-8 ${cartItems.length === 0 ? "h-screen" : "h-auto"}`}>
         {/* Cart Items Section */}
         <div
           id="cart-items"

@@ -18,7 +18,7 @@ function UserDashboard() {
   // Function to handle menu clicks and update content
  
   return (
-    <div className="mt-40 md:mt-32 px-8 py-8 h-auto">
+    <div className="mt-40 md:mt-20 px-8 py-8 h-auto">
       {/* Sidebar Menu */}
       <UserMenu />
 
@@ -52,14 +52,7 @@ function UserDashboard() {
               Home
             </a>
           </li>
-          <li>
-            <a
-              className="flex items-center justify-center bg-black hover:bg-amber-700 text-white font-bold py-2 px-4 rounded transition-all"
-              href="#"
-            >
-              Log Out
-            </a>
-          </li>
+         
         </ul>
 
         {/* Dynamic Content Area */}
@@ -67,7 +60,11 @@ function UserDashboard() {
           id="contentArea"
           className="mt-6 w-full p-6 bg-gray-100 border border-gray-300 rounded shadow-md"
         >
-          <p className="text-lg text-gray-700">Lorem Ipsum</p>
+          <p className="text-lg text-gray-700 text-center">
+            Welcome to the User Dashboard!
+            <br />
+            This is where you can manage your account, view your orders, and more.  Click Menu to view options.
+          </p>
         </div>
       </div>
     </div>

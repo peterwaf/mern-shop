@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useEffect, useStateuseEffect } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ShoppingCart } from "lucide-react";
 import { useSelector, useDispatch } from "react-redux";
@@ -27,8 +27,11 @@ function TopMenu() {
 const handleLogout = () => {
   localStorage.removeItem("firstName");
   localStorage.removeItem("token");
-  dispatch(updateLoggedInStatus());
-  navigate("/");
+  dispatch(updateLoggedInStatus());                  
+  // Delay navigation to let Redux state settle
+  setTimeout(() => {
+    navigate("/", { replace: true });
+  }, 0);
 };
 
   return (
@@ -53,8 +56,11 @@ const handleLogout = () => {
         {isUserLoggedIn ? (
           <>
             <p className="text-black font-bold">Welcome! {name}</p>
+            <Link to="/user-dashboard" className="text-black underline">
+              My dashboard
+            </Link>
 
-            <Link onClick={handleLogout} className="text-black underline">
+            <Link onClick={() => handleLogout()} className="text-black underline">
               Logout
             </Link>
           </>

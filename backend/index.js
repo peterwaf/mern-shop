@@ -17,11 +17,13 @@ const UsersRoute = require("./routes/Users");
 const ProductsRoute = require("./routes/Products");
 const ImagesRoute = require("./routes/Images");
 const CategoriesRoute = require("./routes/Categories");
+const MpesaRoute = require("./routes/Mpesa");
 
 app.use("/", UsersRoute);
 app.use("/", ProductsRoute);
 app.use("/", ImagesRoute);
 app.use("/", CategoriesRoute);
+app.use("/", MpesaRoute);
 app.get("/", (req, res) => {
   res.send("Hello World!");
 })
